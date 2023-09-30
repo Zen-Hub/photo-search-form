@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>page-search</title>
+    <meta name="theme-color" content="#c9e0e04d">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- fonts ================================================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- favicon =========================================================================== -->
+    <link rel="shortcut icon" href="/assets/img/favicons/fav.png" type="image/x-icon">
+    <!-- css =========================================================================== -->
+    
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            line-height: 27px;
+            font-weight: 300;
+            color: #2C2B2B;
+        }
+
+        .container-search {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+        }
+
+        .page-search {
+            display: grid;
+            justify-content: center;
+            height: 100%;
+            width: 800px;
+        }
+
+        .index-print img {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-items: center;
+            width: 620px;
+            height: 846px;
+            margin: 20px;
+            /* border: 1px solid #ff5900; */
+            box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+        }
+
+        .searchInput {
+            display: grid;
+            width: 90px;
+            height: 40px;
+        }
+
+        /* ------------------------------------------ */
+
+        .index-searchInput {
+            display: grid;
+            justify-content: center;
+        }
+
+        .index-searchInput:after {
+            content: "";
+            clear: both;
+            display: table
+        }
+
+
+
+        .index-searchInput input {
+            width: 250px;
+            height: 42px;
+            padding-left: 15px;
+            border-radius: 42px;
+            border: 2px solid #ff5500;
+            background: #F9F0DA;
+            outline: none;
+            transition: .3s linear;
+            margin: 20px;
+        }
+
+        .index-searchInput input:focus {
+            width: 300px;
+        }
+
+        /* если ничего не нашлось */
+        .searchNull {
+            display: grid;
+            height: 20px;
+            color: #ff5500;
+            box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+            margin: 20px;
+            padding: 10px;
+
+        }
+
+        /* ФОРМА ОТПРАВКИ */
+
+        .container-form {
+            display: grid;
+            justify-content: center;
+            margin: 20px;
+            width: 100%;
+            height: 800px;
+
+        }
+
+        .grid-form {
+            display: grid;
+            justify-content: center;
+            width: 100%;
+            box-shadow: 0 0 10px 5px rgb(221, 221, 221);
+            padding: 5px;
+            border-radius: 5px;
+            background: #F9F0DA;
+
+        }
+
+        .mini-title {
+            margin: 5px;
+        }
+
+
+
+        .forcss {
+            border: 1px solid rgb(233, 227, 222);
+            border-radius: 5px;
+            width: 92%;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .form-bigfoto {
+            display: grid;
+            background-color: #ebe0d0;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        .container__form-bigfoto {
+            display: flex;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .container__form-smallfoto {
+            display: flex;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .form-smallfoto {
+            display: grid;
+            background-color: #f0ddc0;
+            border-radius: 5px;
+        }
+
+        .form-bigfoto__block {
+            display: flex;
+        }
+
+        .form-smallfoto__block {
+            display: flex;
+        }
+
+
+        .form-generalfoto {
+            margin-top: 5px;
+            background-color: #eed1a5;
+            border-radius: 5px;
+        }
+
+        .form-electronikfoto {
+            margin-top: 5px;
+            background-color: #aaeba8;
+            border-radius: 5px;
+            margin: 5px 0 5px 0;
+        }
+
+        .forcss.number {
+            width: 70px;
+        }
+
+        .forcss.sum {
+            width: 70px;
+        }
+
+        .form-contacts__for {
+            display: flex;
+        }
+
+        .forcss-numsad__style {
+            width: 40px;
+            background-color: #f0ddc0;
+            border-radius: 5px;
+            border: 1px solid #eed8cd;
+        }
+
+        .forcss-name__style {
+            width: 130px;
+            background-color: #f0ddc0;
+            border-radius: 5px;
+            border: 1px solid #eed8cd;
+        }
+
+        .button-form {
+            grid-column: 1 / -1;
+            background: #ff5500;
+            border-radius: 5px;
+            margin: 5px;
+            border: none;
+            color: #f7eeea;
+            cursor: pointer;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container-search">
+
+        <!-- ФОРМА ОТПРАВКИ -->
+        <div class="container-form">
+            <form action="search-form.php" method="POST" class="grid-form">
+
+                <div class="form-bigfoto">
+                    <div class="mini-title">фото 15х20 В ПЕЧАТНОМ ВИДЕ</div>
+                    <div class="container__form-bigfoto">
+                        <div class="form-bigfoto__leftblock">
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+
+                        </div>
+
+                        <div class="form-bigfoto__rightblock">
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-bigfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-smallfoto">
+                    <div class="mini-title">фото 10х15 В ПЕЧАТНОМ ВИДЕ</div>
+                    <div class="container__form-smallfoto">
+                        <div class="form-minfoto__leftblock">
+
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+
+                        </div>
+
+                        <div class="form-minfoto__rightblock">
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+                            <div class="form-smallfoto__block">
+                                <input class="forcss number" type="text" name="format1" placeholder="номер">
+                                <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-generalfoto">
+                    <div class="mini-title">общее фото:</div>
+                    <div class="form-generallfoto__block">
+                        <input class="forcss number" type="text" name="format1" placeholder="номер">
+                        <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                    </div>
+
+                    <div class="form-generallfoto__block">
+                        <input class="forcss number" type="text" name="format1" placeholder="номер">
+                        <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                    </div>
+
+                    <div class="form-generallfoto__block">
+                        <input class="forcss number" type="text" name="format1" placeholder="номер">
+                        <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                    </div>
+
+                    <div class="form-generallfoto__block">
+                        <input class="forcss number" type="text" name="format1" placeholder="номер">
+                        <input class="forcss sum" type="number" name="quantity1" placeholder="шт">
+                    </div>
+
+
+                </div>
+
+                <div class="form-electronikfoto">
+
+                    <div class="mini-title">фото в электронном виде:</div>
+                    <input class="forcss" type="text" name="photoNumbers" placeholder="Номера фото">
+                </div>
+                <div class="form-contacts">
+                    <div class="form-contacts__for">
+                        <div class="mini-title">номер сада</div>
+                        <input class="forcss-numsad__style" type="text" name="gardenNumber" placeholder="номер">
+                        <div class="mini-title">фамилия</div>
+                        <input class="forcss-name__style" type="text" name="gardenNumber" placeholder="фамилия">
+                    </div>
+
+                    <div class="mini-title">Ваша почта:</div>
+                    <input class="forcss" type="email" name="email" placeholder="Адрес электронной почты">
+                </div>
+                <button class="button-form" type="submit">ОТПРАВИТЬ</button>
+            </form>
+        </div>
+
+
+
+
+        <!-- ПРОБНИКИ-------------------------------------------------->
+
+        <div class="page-search">
+            <div class="index-searchInput">
+
+                <input type="text" id="searchInput" placeholder="Фильтр работает:) введите 1 или 2...">
+
+            </div>
+
+
+            <div class="index-print"></div>
+            <div class="searchNull"></div>
+        </div>
+        <!-- SCRIPT------------------------------------------------->
+        <script>
+            // Путь к папке с фотографиями
+            const photoFolder = 'assets/images';
+
+            // Функция для создания элемента изображения в галерее
+            function createImageElement(src, alt) {
+                const img = document.createElement('img');
+                img.setAttribute('src', src); // Установка значения атрибута src для изображения. Значение берется из переданного параметра src.
+                img.setAttribute('alt', alt); // Добавляем атрибут alt с названием изображения
+
+                console.log(img)
+
+                img.addEventListener('click', function () {
+                    // При клике на фото, увеличиваем его размер
+                    // img.style.height = '800px'
+                    // img.style.width = '600px';
+                });
+                return img;
+            }
+
+            // Загрузка фотографий и создание галереи
+            function loadPhotos() {
+                const indexPrint = document.querySelector('.index-print');
+
+                const searchNull = document.querySelector('.searchNull')
+
+                fetch(`${photoFolder}/images.json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(photo => {
+                            const img = createImageElement(`${photoFolder}/${photo.src}`, photo.alt);
+                            indexPrint.appendChild(img);
+                        });
+
+                        // Получаем ссылку на элемент ввода текста поиска
+                        const searchInput = document.getElementById('searchInput');
+
+                        // Добавляем обработчик события "input" для поля ввода текста
+                        searchInput.addEventListener('input', function () {
+                            const searchValue = searchInput.value.toLowerCase();
+
+                            // Перебираем все изображения в галерее и скрываем те, у которых значение атрибута alt не содержит искомый текст
+                            const images = indexPrint.querySelectorAll('img');
+
+                            //Если ничего не найдено
+                            let foundMatch = false;
+
+                            images.forEach(image => {
+                                const altText = image.alt.toLowerCase();
+                                if (altText.includes(searchValue)) {
+                                    image.style.display = 'grid';
+                                    foundMatch = true;
+                                } else {
+                                    image.style.display = 'none';
+                                }
+                            });
+
+                            if (!foundMatch) {
+                                searchNull.innerHTML = 'Ничего не нашлось, попробуйте ввести другой номер'
+                            } else {
+                                searchNull.innerHTML = '';
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Ошибка загрузки фотографий:', error));
+            }
+            // Запуск загрузки фотографий при загрузке страницы
+            window.addEventListener('load', loadPhotos);
+
+        </script>
+    </div>
+
+</body>
+
+</html>
