@@ -220,6 +220,119 @@
             cursor: pointer;
             height: 20px;
         }
+
+         /* ------@media-query-------------- */
+        @media screen and (max-width: 768px) {
+            body {
+                display: grid;
+                font-size: 16px;
+                line-height: 24px;
+            }
+
+            .container-search {
+                display: grid;
+                grid-auto-flow: row;
+                justify-content: center;
+            }
+
+            .index-print img {
+                width: 100%;
+                height: auto;
+                margin: 10px;
+            }
+
+            .index-searchInput input {
+                width: 200px;
+                margin: 10px;
+            }
+
+            .searchNull {
+                margin: 10px;
+                padding: 5px;
+            }
+
+            .container-form {
+                height: auto;
+            }
+
+            .form-bigfoto__block,
+            .form-smallfoto__block {
+                flex-direction: column;
+            }
+
+            .form-bigfoto,
+            .form-smallfoto {
+                margin-bottom: 10px;
+            }
+
+            .forcss.number,
+            .forcss.sum {
+                width: 50px;
+            }
+
+            .forcss-numsad__style,
+            .forcss-name__style {
+                width: 100%;
+            }
+
+            .button-form {
+                height: 30px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 14px;
+                line-height: 21px;
+            }
+
+            .index-searchInput input {
+                width: 150px;
+                margin: 5px;
+            }
+
+            .searchNull {
+                margin: 5px;
+                padding: 3px;
+                font-size: 14px;
+            }
+
+            .forcss {
+                margin: 3px;
+                padding: 3px;
+                font-size: 14px;
+            }
+
+            .mini-title {
+                font-size: 16px;
+            }
+
+            .form-bigfoto__block,
+            .form-smallfoto__block {
+                flex-direction: column;
+            }
+
+            .form-bigfoto,
+            .form-smallfoto {
+                margin-bottom: 5px;
+            }
+
+            .forcss.number,
+            .forcss.sum {
+                width: 40px;
+            }
+
+            .forcss-numsad__style,
+            .forcss-name__style {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .button-form {
+                height: 25px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
